@@ -1,6 +1,7 @@
 package PintoresV2;
 
 public class Cubo {
+
     private String color;
     private boolean enUso;
 
@@ -13,11 +14,12 @@ public class Cubo {
         return this.enUso;
     }
 
-    public void reservar() {
+    public void reservado() {
         this.enUso = true;
     }
 
-    public void liberar() {
+    public void liberado() {
         this.enUso = false;
     }
 }
+

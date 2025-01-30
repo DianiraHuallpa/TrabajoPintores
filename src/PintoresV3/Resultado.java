@@ -4,13 +4,13 @@ public class Resultado {
     private int azul;
     private int rojo;
     private int verde;
-    private int caca;
+    private int tutifruti;
 
     public Resultado () {
         this.azul = 0;
         this.rojo = 0;
         this.verde = 0;
-        this.caca = 0;
+        this.tutifruti = 0;
     }
 
     public void add (String color) {
@@ -27,8 +27,8 @@ public class Resultado {
                 this.verde++;
                 break;
             }
-            case "caca": {
-                this.caca++;
+            case "tutifruti": {
+                this.tutifruti++;
                 break;
             }
         }
@@ -40,7 +40,7 @@ public class Resultado {
                 "azul=" + azul +
                 ", rojo=" + rojo +
                 ", verde=" + verde +
-                ", caca=" + caca +
+                ", tutifruti=" + tutifruti +
                 '}';
     }
 }

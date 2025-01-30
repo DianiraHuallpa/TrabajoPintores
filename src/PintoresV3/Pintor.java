@@ -54,7 +54,7 @@ public class Pintor extends Thread {
                     Thread.sleep(r.nextInt(1000, 2000));
                 } else {
                     // ESPERANDO REINTENTO
-                    Thread.sleep(r.nextInt(1000, 2000));
+                    Thread.sleep(r.nextInt(100, 2000));
                 }
             }
         } catch (InterruptedException e) {
@@ -66,13 +66,13 @@ public class Pintor extends Thread {
         Cubo cian = new Cubo("cian");
         Cubo magenta = new Cubo("magenta");
         Cubo amarillo = new Cubo("amarillo");
-        Cubo verde = new Cubo("verde");
+        Cubo caca = new Cubo("caca");
         Resultado res = new Resultado();
 
         Pintor p1 = new Pintor(1, cian, magenta, "azul", res);
         Pintor p2 = new Pintor(2, magenta, amarillo, "rojo", res);
-        Pintor p3 = new Pintor(3, amarillo, cian, "verde", res);
-        Pintor p4 = new Pintor(4, amarillo, verde, "caca", res);
+        Pintor p3 = new Pintor(3, amarillo, caca, "verde", res);
+        Pintor p4 = new Pintor(4, caca, cian, "tutifruti", res);
 
         p1.start();
         p2.start();

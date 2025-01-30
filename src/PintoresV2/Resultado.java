@@ -1,16 +1,17 @@
 package PintoresV2;
+//número de veces que se ha producido cada color de pintura
 
 public class Resultado {
     private int azul;
     private int rojo;
     private int verde;
 
-    public Resultado () {
+    public Resultado () {//3 contadores
         this.azul = 0;
         this.rojo = 0;
         this.verde = 0;
     }
-
+//actualización de resultados
     public void add (String color) {
         switch (color) {
             case "azul": {
