@@ -1,12 +1,12 @@
 package PintoresV2;
-//número de veces que se ha producido cada color de pintura
+//NUMERO DE VECES QUE SE HA PRODUCIDO CADA MEZCLA DE PINTURAS
 
 public class Resultado {
     private int azul;
     private int rojo;
     private int verde;
-
-    public Resultado () {//3 contadores
+// 3 CONTADORES uno para cada color
+    public Resultado () {
         this.azul = 0;
         this.rojo = 0;
         this.verde = 0;

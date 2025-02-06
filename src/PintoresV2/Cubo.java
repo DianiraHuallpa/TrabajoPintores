@@ -1,5 +1,5 @@
 package PintoresV2;
-
+// CREAMOS LOS CUBOS QUE LOS PINTORES VAN A UTILIZAR
 public class Cubo {
 
     private String color;
@@ -8,6 +8,10 @@ public class Cubo {
     public Cubo(String color) {
         this.color = color;
         this.enUso = false;
+    }
+
+    public String getColor() {
+        return this.color;
     }
 
     public boolean getEnUso() {

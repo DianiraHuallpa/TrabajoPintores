@@ -17,9 +17,9 @@ public class Pintor extends Thread {
         this.color = color;
         this.res = res;
     }
-
+//evitar que otro pintor use los mismos cubos al mismo tiempo
     public boolean reservar() {
-        synchronized (cubo1) {// evitar que otro pintor use los mismos cubos al mismo tiempo
+        synchronized (cubo1) {//
             synchronized (cubo2) {
                 if (!this.cubo1.getEnUso() && !this.cubo2.getEnUso()) {
                     this.cubo1.reservado();
@@ -30,6 +30,7 @@ public class Pintor extends Thread {
         }
         return false;//Si no, sale y desbloquea los cubos automáticamente.
     }
+    //Bloqueamos los cubos que queremos liberar para liberarlos
     public void liberar() {
         synchronized (cubo1) {
             synchronized (cubo2) {
@@ -48,19 +49,17 @@ public class Pintor extends Thread {
 
                 if (reservar()) {
                     // MECLANDO
-                    System.out.println("Pintor " + num + " Mezclando " + this.color + " ...");
-                    Thread.sleep(r.nextInt(100, 500));//tiempo de mezcla
+                    System.out.println("Pintor " + num + " Mezclando " + this.color + " con " + this.cubo1.getColor() + " y " + this.cubo2.getColor() + " ...");
+                    Thread.sleep(r.nextInt(100, 500));//tiempo de trabajo de mezcla
 
-                    liberar();
+                    liberar();//cubos disponibles para otros pintores
 
                     System.out.println(res);
-                    Thread.sleep(r.nextInt(1000, 2000));
-
+                    Thread.sleep(r.nextInt(1000, 2000));//Descansa antes de volver a intentar mezclar
                 } else {
                     // ESPERANDO REINTENTO
-                    System.out.println("Pinto " + num + " esperando reintento ...");
+                    System.out.println("Pintor " + num + " esperando cubo "  + this.cubo1.getColor() + " y " + this.cubo2.getColor());
                     Thread.sleep(r.nextInt(100, 500));
-
                 }
             }
         } catch (InterruptedException e) {
@@ -86,6 +85,11 @@ public class Pintor extends Thread {
 
     }
 }
+
+
+
+
+
+
 //Como cada pintor descansa un tiempo aleatorio antes de reintentar, no siempre intentarán reservar los cubos al mismo tiempo.
-//Si un pintor no puede reservar, lo intentaría inmediatamente otra vez, bloqueando la CPU con intentos constantes.
 //Al dormir aleatoriamente, los hilos tienen más oportunidad de acceder en distintos momentos.

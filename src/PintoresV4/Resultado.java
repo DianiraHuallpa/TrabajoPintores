@@ -1,4 +1,4 @@
-package PintoresV3;
+package PintoresV4;
 
 public class Resultado {
     private int azul;

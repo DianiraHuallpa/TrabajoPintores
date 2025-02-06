@@ -1,4 +1,4 @@
-package PintoresV3;
+package PintoresV4;
 
 import java.util.Random;
 
@@ -36,31 +36,37 @@ public class Pintor extends Thread {
                 this.res.add(this.color);
                 this.cubo1.liberado();
                 this.cubo2.liberado();
+                this.cubo1.notifyAll();
+                this.cubo2.notifyAll();
             }
+        }
+    }
+
+    public synchronized void mezclar() {
+        Random r = new Random();
+        try {
+            while (true) {
+                while(!this.reservar()) {
+                    System.out.println("Pintor " + num + " esperando cubo "  + this.cubo1.getColor() + " y " + this.cubo2.getColor());
+                    this.cubo1.wait();
+                    this.cubo2.wait();
+                }
+                // MECLANDO
+                System.out.println("Pintor " + num + " Mezclando " + this.color + " con " + this.cubo1.getColor() + " y " + this.cubo2.getColor() + " ...");
+                Thread.sleep(r.nextInt(100, 500));
+                liberar();
+                System.out.println(res);
+                this.notifyAll();
+                Thread.sleep(r.nextInt(1000, 2000));
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void run() {
-        Random r = new Random();
-        try {
-            while (true) {
-                if (reservar()) {
-                    // MECLANDO
-                    System.out.println("Pintor " + num + " Mezclando " + this.color + " con " + this.cubo1.getColor() + " y " + this.cubo2.getColor() + " ...");
-                    Thread.sleep(r.nextInt(100, 500));
-                    liberar();
-                    System.out.println(res);
-                    Thread.sleep(r.nextInt(1000, 2000));
-                } else {
-                    // ESPERANDO REINTENTO
-                    System.out.println("Pintor " + num + " esperando cubo "  + this.cubo1.getColor() + " y " + this.cubo2.getColor());
-                    Thread.sleep(r.nextInt(100, 2000));
-                }
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        this.mezclar();
     }
 
     public static void main(String[] args) {
